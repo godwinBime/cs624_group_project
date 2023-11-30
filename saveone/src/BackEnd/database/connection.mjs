@@ -1,4 +1,4 @@
-import {MongoClient} from "mongodb";
+/*import {MongoClient} from "mongodb";
 
 const connectionString = process.env.ATLAS_URI || "";
 
@@ -15,3 +15,4 @@ try{
 let db = conn.db("cs624-tp-db");
 
 export default db;
+*/
