@@ -19,12 +19,12 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-require('./routes/innovators.js')
+require('./innovators.js')
 
 app.use(bodyParser.json())
 const Innovator = mongoose.model("innovator")
 
-ATLAS_URI = "mongodb+srv://godwin:19CS624Gp89@mscs-projects-cluster.dzzyyrw.mongodb.net/?retryWrites=true&w=majority"
+ATLAS_URI = "mongodb+srv://godwin:19CS624Gp89@cs624-innovators-tp.dal5qur.mongodb.net/?retryWrites=true&w=majority"
 
 mongoose.connect(ATLAS_URI, {
     useNewUrlParser: true
@@ -42,8 +42,8 @@ app.get('/', (req, res) => {
     res.send("Hello world")
 })
 
-app.post("/sendItem", (req, res) => {
-    const innovator = new Innovator({
+app.post("/send-item", (req, res) => {
+    const item = new Innovator({
         itemDescription: req.body.itemDescription,
         price: req.body.price,
         manufacturer: req.body.manufacturer,
@@ -51,7 +51,7 @@ app.post("/sendItem", (req, res) => {
         quantity: req.body.quantity,
         serialNumber: req.body.serialNumber
     })
-    innovator.save()
+    item.save()
     .then(data => {
         console.log(data)
     }).catch(err => {
