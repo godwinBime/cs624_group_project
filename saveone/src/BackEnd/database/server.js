@@ -1,30 +1,13 @@
-/*import express from "express";
-import cors from "cors";
-import "./loadEnvironment.mjs";
-import innovators from "./routes/innovators.mjs"
-
-const PORT = process.env.PORT || 5050;
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use("/innovator", innovators);
-
-//Start the express server
-app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
-})*/
-
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-require('./innovators.js')
+require('./saveone.js')
 
 app.use(bodyParser.json())
-const Innovator = mongoose.model("innovator")
+const SaveOne = mongoose.model("saveone")
 
-ATLAS_URI = "mongodb+srv://godwin:19CS624Gp89@cs624-innovators-tp.dal5qur.mongodb.net/?retryWrites=true&w=majority"
+ATLAS_URI = "mongodb+srv://godwin:19CS624Gp89@saveonecluster.plfgghg.mongodb.net/innovators?retryWrites=true&w=majority"
 
 mongoose.connect(ATLAS_URI, {
     useNewUrlParser: true
@@ -43,7 +26,7 @@ app.get('/', (req, res) => {
 })
 
 app.post("/send-item", (req, res) => {
-    const item = new Innovator({
+    const saveone = new SaveOne({
         itemDescription: req.body.itemDescription,
         price: req.body.price,
         manufacturer: req.body.manufacturer,
@@ -51,7 +34,7 @@ app.post("/send-item", (req, res) => {
         quantity: req.body.quantity,
         serialNumber: req.body.serialNumber
     })
-    item.save()
+    saveone.save()
     .then(data => {
         console.log(data)
     }).catch(err => {
