@@ -21,8 +21,14 @@ mongoose.connection.on("Error", (err) => {
     console.log("Error", err)
 })
 
+//Fetch all the data from the database
 app.get('/', (req, res) => {
-    res.send("Hello world")
+    SaveOne.find({})
+    .then(data => {
+        res.send(data)
+    }).catch(err => {
+        console.log("Delete Error::", err)
+    })    
 })
 
 //Data entry route
@@ -41,14 +47,14 @@ app.post("/send-item", (req, res) => {
     }).catch(err => {
         console.log("Post Error::", err)
     })
-    res.send("Successfully posted")
+    res.send(data)
 })
 
 //Delete route
 app.delete('/delete-item', (req, res) => {
     SaveOne.findOneAndDelete(req.body.id)
     .then(data => {
-        res.send("Deleted successfully.")
+        res.send(data)
         console.log("Data delete is below: \n", data)
     }).catch(err => {
         console.log("Delete Error::", err)
@@ -57,7 +63,7 @@ app.delete('/delete-item', (req, res) => {
 
 //Update Route
 app.patch('/update-item', (req, res) => {
-    SaveOne.findByIdAndUpdate(req.body._id, {
+    SaveOne.findByIdAndUpdate(req.body.id, {
         itemDescription: req.body.itemDescription,
         price: req.body.price,
         manufacturer: req.body.manufacturer,
@@ -65,7 +71,7 @@ app.patch('/update-item', (req, res) => {
         quantity: req.body.quantity,
         serialNumber: req.body.serialNumber
     }).then(data => {
-        res.send("Data updated successfully")
+        res.send(data)
         console.log(data)
     }).catch(err => {
         console.log("Delete Error::", err)
