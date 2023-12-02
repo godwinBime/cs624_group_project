@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
     res.send("Hello world")
 })
 
+//Data entry route
 app.post("/send-item", (req, res) => {
     const saveone = new SaveOne({
         itemDescription: req.body.itemDescription,
@@ -38,9 +39,37 @@ app.post("/send-item", (req, res) => {
     .then(data => {
         console.log(data)
     }).catch(err => {
-        console.log("Error::", err)
+        console.log("Post Error::", err)
     })
     res.send("Successfully posted")
+})
+
+//Delete route
+app.delete('/delete-item', (req, res) => {
+    SaveOne.findOneAndDelete(req.body.id)
+    .then(data => {
+        res.send("Deleted successfully.")
+        console.log("Data delete is below: \n", data)
+    }).catch(err => {
+        console.log("Delete Error::", err)
+    })
+})
+
+//Update Route
+app.patch('/update-item', (req, res) => {
+    SaveOne.findByIdAndUpdate(req.body._id, {
+        itemDescription: req.body.itemDescription,
+        price: req.body.price,
+        manufacturer: req.body.manufacturer,
+        picture: req.body.picture,
+        quantity: req.body.quantity,
+        serialNumber: req.body.serialNumber
+    }).then(data => {
+        res.send("Data updated successfully")
+        console.log(data)
+    }).catch(err => {
+        console.log("Delete Error::", err)
+    })
 })
 
 app.listen(3000, () => {
