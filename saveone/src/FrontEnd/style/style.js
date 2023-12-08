@@ -21,15 +21,11 @@ const saveOneStyles = StyleSheet.create({
         width: 100,
         height: 120
     },
-
-    itemButton:{
-        justifyContent: 'center'
-    },
     itemText: {
         marginTop: 10,
         marginRight: 10,
         marginLeft: 10,
-        marginBottom: 30,
+        marginBottom: 10,
     }
 })
 
