@@ -7,6 +7,7 @@ const saveOneStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    
     itemDescripitionCard:{
         marginTop: 10,
         marginRight: 10,
