@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { LogBox } from "react-native";
 
+
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
 ]);
