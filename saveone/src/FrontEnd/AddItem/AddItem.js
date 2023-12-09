@@ -50,8 +50,8 @@ const AddItemScreen = () => {
 
     <TextInput
         placeholder="Enter Amount"
-        value={descriptionValue}
-        onChangeText={(text) => setDescriptionValue(text)}
+        value={amount}
+        onChangeText={(text) => setamount(text)}
         style={styles.input}
       />
     <TouchableOpacity style={styles.button} onPress={pickImage}>
