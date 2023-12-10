@@ -7,10 +7,13 @@ import ImagePicker from 'react-native-image-picker';
 
 
 const AddItemScreen = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [descriptionValue, setDescriptionValue] = useState('');
-  const [amount, setamount] = useState('');
-  const [imageUri, setImageUri] = useState(null);
+  const [itemDescription, setItemDescription] = useState('');
+  const [manufacturer, setManufacturer] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [picture, setPicture] = useState(null);
+  const [serialNumber, setSerialNumber] = useState('');
+  
 
   const pickImage = () => {
     ImagePicker.showImagePicker({ title: 'Select Image' }, (response) => {
@@ -22,36 +25,78 @@ const AddItemScreen = () => {
 
   const addItem = () => {
     // Logic to add item to the list or database
-    console.log(`Added item: ${inputValue} - Description: ${descriptionValue} - amount {amount}`);
-    setInputValue('');
-    setDescriptionValue('');
-    setamount('');
-    setImageUri(null);
+    console.log(`Added item: ${itemDescription} - Quantity ${quantity} - price {price}`);
+    setItemDescription('');
+    setManufacturer('');
+    setPrice('');
+    setQuantity('');
+    setPicture(null);
+    setSerialNumber('')
     
   };
+  const AddItemScreen = async () => {
+    try {
+      const newItem = {
+        ItemName: itemDescription,
+        Price: price,
+        Image: picture,
+        Manufacturer: manufacturer,
+        Quantity: quantity,
+        SerialNumber: serialNumber
+      };
 
+      const response = await fetch('https://ubiquitous-space-happiness-gp5w6gxqq962wprg-3000.app.github.dev/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newItem),
+      });
 
+      if (response.ok) {
+        // Item added successfully
+        console.log('Item added:', newItem);
+          setItemDescription('');
+          setManufacturer('');
+          setPrice('');
+          setQuantity('');
+          setPicture(null);
+          setSerialNumber('')
+      } else {
+        console.error('Failed to add item:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding item:', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <TextInput
         placeholder="Enter Item"
-        value={inputValue}
-        onChangeText={(text) => setInputValue(text)}
+        value={itemDescription}
+        onChangeText={(text) => setItemDescription(text)}
         style={styles.input}
       />
   
       <TextInput
-        placeholder="Enter Description"
-        value={descriptionValue}
-        onChangeText={(text) => setDescriptionValue(text)}
+        placeholder="Enter Manufacturer"
+        value={manufacturer}
+        onChangeText={(text) => setManufacturer(text)}
         style={styles.input}
       />   
 
     <TextInput
-        placeholder="Enter Amount"
-        value={amount}
-        onChangeText={(text) => setamount(text)}
+        placeholder="Enter Price"
+        value={price}
+        onChangeText={(text) => setPrice(text)}
+        style={styles.input}
+      />
+
+<TextInput
+        placeholder="Enter Quantity"
+        value={quantity}
+        onChangeText={(text) => setQuantity(text)}
         style={styles.input}
       />
     <TouchableOpacity style={styles.button} onPress={pickImage}>
@@ -59,7 +104,7 @@ const AddItemScreen = () => {
       </TouchableOpacity>
 
 
-      {imageUri && <Image source={{ uri: imageUri }} style={styles.image} />}
+      {picture && <Image source={{ uri: picture }} style={styles.image} />}
 
       <TouchableOpacity style={styles.button} onPress={addItem}>
         <Text style={styles.buttonText}>Add Item</Text>

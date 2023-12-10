@@ -27,9 +27,14 @@ export default class App extends Component {
     price: []
   }
 
-  addGrocery = () => {
-    
+  //addGrocery = () => // For instance, in your addGrocery function
+
+  
+addGrocery = () => {
+
   }
+    
+  
 
   readGrocery = () => {
     
