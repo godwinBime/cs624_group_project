@@ -1,14 +1,11 @@
 import { StyleSheet } from "react-native";
 import React from "react";
-import { colors } from "../theme";
 
 const saveOneStyles = StyleSheet.create({
     container:{
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        backgroundColor: colors.primary,
+        alignItems: 'center'
     },
     
     itemDescripitionCard:{
@@ -30,12 +27,11 @@ const saveOneStyles = StyleSheet.create({
         marginRight: 10,
         marginLeft: 10,
         marginBottom: 10,
+    },
+    buttonText:{
+        
     }
-
-    
 })
-
-
 
 export default saveOneStyles;
 

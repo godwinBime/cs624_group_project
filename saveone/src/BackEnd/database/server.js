@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     .then(data => {
         res.send(data)
     }).catch(err => {
-        console.log("Delete Error::", err)
+        console.log("Get Error::", err)
     })    
 })
 
@@ -44,10 +44,10 @@ app.post("/send-item", (req, res) => {
     saveone.save()
     .then(data => {
         console.log(data)
+        res.send(data)
     }).catch(err => {
         console.log("Post Error::", err)
-    })
-    res.send(data)
+    })    
 })
 
 //Delete route
@@ -74,7 +74,7 @@ app.patch('/update-item', (req, res) => {
         res.send(data)
         console.log(data)
     }).catch(err => {
-        console.log("Delete Error::", err)
+        console.log("Update Error::", err)
     })
 })
 
